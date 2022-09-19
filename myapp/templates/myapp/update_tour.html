@@ -1,0 +1,76 @@
+{% extends "myapp/cust_base.html" %}
+{% block style%}
+<title>update_tour</title>
+
+<style>
+    form ul {
+        visibility: hidden
+    }
+
+    form label {
+        font-weight: bold;
+        margin-right: 50px;
+
+    }
+
+    form p {
+        padding: 0.3cm;
+        width: 80%
+    }
+
+    form input {
+        width: 70%
+    }
+
+    form textarea {
+        width: 90%
+    }
+</style>
+
+{% endblock %}
+
+{% block dashboard %}
+<h2>My Profile>Update Tour</h2>
+<hr>
+<div style="margin-left: 20%;padding: 0.8cm;">
+    <h2>{{tour.tour_name}}</h2>
+    <form name="" method="POST" style=" width: 80%;" enctype="multipart/form-data">
+        {% csrf_token %}
+
+
+        <img src="/media/{{tour.tour_image}}" style="height:40vh;width:60vh">
+        <p><label for="id_tour_image"> Update Tour image:</label> <input type="file" name="tour_image" accept="image/*"
+                id="id_tour_image"></p>
+
+        <p><label for="id_tour_name">Tour name:</label> <input type="text" name="tour_name" maxlength="100" required
+                id="id_tour_name" value="{{tour.tour_name}}"></p>
+
+        <p><label for="id_place_from">Place from:</label> <input type="text" name="place_from" maxlength="100" required
+                id="id_place_from" value="{{tour.place_from}}"></p>
+        <p><label for="id_place_to">Place to:</label> <input type="text" name="place_to" maxlength="100" required
+                id="id_place_to" value="{{tour.place_to}}"></p>
+        <p><label for="id_places_to_be">Places to be:</label> <textarea name="places_to_be" cols="40" rows="10"
+                maxlength="500" required id="id_places_to_be" >{{tour.places_to_be}}
+</textarea></p>
+        <p><label for="id_days">Days:</label> <input type="number" name="days" required id="id_days"
+            value="{{tour.days}}"></p>
+        <p><label for="id_nights">Nights:</label> <input type="number" name="nights" required id="id_nights"
+            value="{{tour.nights}}"></p>
+        <p><label for="id_fare">Fare:</label> <input type="number" name="fare" step="any" required id="id_fare"
+            value="{{tour.fare}}"></p>
+        <p><label for="id_tour_descriptions">Tour descriptions:</label> <textarea name="tour_descriptions" cols="40"
+                rows="10" maxlength="5000" required id="id_tour_descriptions" >{{tour.tour_descriptions}}
+</textarea></p>
+        <button type="submit" id="submit" class="btn  btn-block" style="background-color:rgb(7, 80, 49);color: white;">
+            Save Changes</button>
+    </form>
+</div>
+
+{% if status %}
+        <script>
+            alert("{{ status}}")
+            window.location = "/my_tour"
+        </script>
+        
+        {% endif %} 
+{% endblock %}

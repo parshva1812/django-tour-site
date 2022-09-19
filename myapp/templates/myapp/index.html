@@ -1,0 +1,106 @@
+{% extends "myapp/base.html" %}
+{% block head %}
+<title>index</title>
+
+<style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+    width: 100%;
+    height: 95vh;
+
+  }
+  #home{
+    
+    color:whitesmoke;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color:rgb(181, 224, 24);
+  }
+  </style>
+{% endblock %}
+
+{% block content %}
+<!-- image slider -->
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+  
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://images.unsplash.com/photo-1492086393392-4d7fc603473a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1351&q=80" alt="Los Angeles" width="1100" height="500">
+     
+    </div>
+    <div class="carousel-item">
+      <img src="https://images.unsplash.com/photo-1527856263669-12c3a0af2aa6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80" alt="Chicago" width="1100" height="500">
+     
+    </div>
+    <div class="carousel-item">
+      <img src="https://images.unsplash.com/photo-1440186347098-386b7459ad6b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1350&q=80" alt="New York" width="1100" height="500">
+     
+    </div>
+  </div>
+  
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+
+<!-- package start -->
+
+<div class="row" style="">
+
+  {% for t in tours %}
+  
+  <div class="col-12 col-md-6 col-lg-4" style="padding:2cm;">
+      <div class="card" style="width: 25rem; border-radius:50px;background-color:rgb(247, 250, 245); height:30rem">
+          <img class="bd-placeholder-img card-img-top" width="100%" height="180" src="/media/{{t.tour_image}}"
+              style="border-radius:25px;">
+
+
+
+
+          <div class="card-body">
+              <h5 class="card-title">{{t.tour_name}}</h5>
+              <p class="card-text"><i class="fa fa-calendar"> </i> {{t.days}}Days/{{t.nights}}Nights</p>
+              <p class="card-text">From &#8377;{{t.fare}}/-</p>
+              <div style="padding: 60px 120px;">
+                  <a href="{% url 'packages' %}" class="btn btn-primary" style="border-radius: 50;">View Details</a>
+                  
+
+              </div>
+          </div>
+      </div>
+  </div>
+  
+
+  
+  {% endfor %}
+  </div>
+
+<!-- blog -->
+<h2 align="center" style="padding:3% ;"><hr>Blogs<hr></h2><
+<div align="center" class="card" style="width:60%;margin: auto;">
+  <img class="card-img-top" src="https://imgcld.yatra.com/ytimages/image/upload/t_seo_Holidays_w_380_h_270_c_fill_g_auto_q_auto:good_f_jpg/v1461309470/Hampta_Pass4.jpg" alt="Card image" style="width:100%;height: 40vh;">
+  <div class="card-body">
+    <h4 class="card-title"><b>Manali</b></h4>
+    <p class="card-text">Manali is a resort and tourist town nestled in the mountains of the Indian state of Himachal Pradesh near the northern end of the Kullu Valley in the Beas River Valley. It is located in the Kullu district, about 270 km (168 mi) north of the state capital, Shimla, 309 km (192 miles) northeast of Chandigarh, and 544 km (338 miles) northeast of Delhi, the national capital. The small town, with a population of 8,096, is the beginning of an ancient trade route to Ladakh and from there over the Karakoram Pass on to Yarkand and Khotan in the Tarim Basin. It is a popular tourist destination and serves as the gateway to Lahaul and Spiti district as well as Leh.</p>
+    <a href="#" class="btn btn-primary stretched-link">view full Blog</a>
+  </div>
+</div>
+{% if status %}
+<script>
+    alert("{{ status}}")
+</script>
+
+{% endif %}
+{% endblock %}

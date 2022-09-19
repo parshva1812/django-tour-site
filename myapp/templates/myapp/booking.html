@@ -1,0 +1,74 @@
+
+{% extends "myapp/base.html" %}
+
+{% block head %}
+<title>My bookings</title>
+
+<style>
+
+#blogs{
+    
+    color:rgb(224, 221, 221);
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color:rgb(181, 224, 24);
+  }
+  
+    form ul{
+        visibility:hidden
+    }
+
+   form label{
+        font-weight:bold;
+        margin-right: 50px;
+
+    }
+    form p{
+        padding: 0.3cm;
+        width:80%
+        
+    }
+    form input{
+        width: 70%
+    }
+    form textarea{
+        width:90%
+    }
+    
+
+   </style>
+
+
+
+{% endblock %}
+{% block content %}
+
+<br>
+<br>
+{% if user.is_authenticated %}
+<div style="margin-left: 20%;padding: 0.8cm;" >
+    <form name="" method="POST" style=" width: 80%;" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+
+<button type="submit"  id="submit" class="btn  btn-block" style="background-color:rgb(7, 80, 49);color: white;"> Next </button>
+</form>
+</div>
+{% if status %}
+        <script>
+            alert("{{status}}")
+            window.location = "/mybooking"
+        </script>
+        
+  {% endif %} 
+
+  {% else %}
+       <script>
+           alert("Please Regiater or login for booking")
+           window.location ="/"
+       </script>
+
+  
+  {% endif %}
+
+{% endblock %}

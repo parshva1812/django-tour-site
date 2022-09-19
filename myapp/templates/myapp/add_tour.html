@@ -1,0 +1,51 @@
+{% extends "myapp/cust_base.html" %}
+{% block style%}
+<title>add tour</title>
+
+   <style>
+    form ul{
+        visibility:hidden
+    }
+
+   form label{
+        font-weight:bold;
+        margin-right: 50px;
+
+    }
+    form p{
+        padding: 0.3cm;
+        width:80%
+        
+    }
+    form input{
+        width: 70%
+    }
+    form textarea{
+        width:90%
+    }
+    
+
+   </style>
+
+{% endblock %}
+
+{% block dashboard %}
+<h2>My Profile>Add Tour</h2>
+<hr>
+<div style="margin-left: 20%;padding: 0.8cm;" >
+    <form name="" method="POST" style=" width: 80%;" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+{{form.as_p}}
+<button type="submit"  id="submit" class="btn  btn-block" style="background-color:rgb(7, 80, 49);color: white;"> Add Tour</button>
+</form>
+</div>
+
+{% if status %}
+        <script>
+            alert("{{ status}}")
+            window.location = "/add_tour"
+        </script>
+        
+        {% endif %} 
+{% endblock %}

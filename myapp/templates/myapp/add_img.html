@@ -1,0 +1,73 @@
+{% extends "myapp/cust_base.html" %}
+
+{% block style%}
+<title>add Images</title>
+
+<style>
+    form label{
+        font-weight:bold;
+        margin-right: 50px;
+
+    }
+    form p{
+        padding: 0.3cm;
+       
+        
+    }
+    form input{
+        width: 70%
+    }
+    form textarea{
+        width:100%
+    }
+    
+</style>
+{% endblock %}
+{% block dashboard %}
+<h2>My Profile>Add Images</h2>
+<hr>
+<div style="margin-left: 25%;padding: 1cm;" >
+    <form name="" method="POST" style=" width: 50%;" enctype="multipart/form-data">
+    {% csrf_token %}
+{{form.as_p}}
+<button type="submit"  id="submit" class="btn  btn-block" style="background-color:rgb(7, 80, 49);color: white;"> Add image</button>
+</form>
+</div>
+{% if status %}
+        <script>
+            alert("{{ status}}")
+            window.location = "/add_img"
+        </script>
+        
+        {% endif %} 
+        <!-- <div class="form">
+    <form name="" method="POST" style=" width: 50%;
+    margin-left: 25%;">
+        {% csrf_token %}
+        <div class="form-group " style="padding: 0.3cm;">
+            <label><b>Add Image :  </b></label>
+            <br>
+            <input name="image" class="form-control" type="file" accept="image/png, image/jpeg" required>
+            
+        </div> 
+        
+        <div class="form-group" style="padding: 0.3cm;">
+            <label><b>Description :</b></label>
+            <br> -->
+            <!-- <input name="desc" id="desc" class="form-control"  type="textarea" rows="5" placeholder="Description" cols="50"> -->
+            <!-- <textarea class="form-control" id="desc" name="desc"rows="4" placeholder="Description" required></textarea>
+
+        </div> 
+        <div class="form-group">
+            <button type="submit"  id="submit" class="btn  btn-block" style="background-color:rgb(7, 80, 49);color: white;"> Add image
+             
+        </div> 
+        {% if status %}
+        <script>
+            alert("{{ status}}")
+            window.location = "/add_img"
+        </script>
+        
+        {% endif %} -->
+
+{% endblock %}

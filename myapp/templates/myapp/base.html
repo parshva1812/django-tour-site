@@ -1,0 +1,248 @@
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        
+        
+          {% block head %}
+          {% endblock %}
+          
+      </head>
+      
+    <body>
+        <!-- header code -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top " style="background-color: rgb(7, 80, 49);height:10vh;">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#" style="color: rgb(181, 224, 24);font-weight: 900;">LocateHeavens</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" id="home" aria-current="page" href="{% url 'index' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="about" href="{% url 'laboutus' %}">About Us</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="packages" href="{% url 'packages' %}">Packages</a>
+                  </li>
+                
+                  <li class="nav-item">
+                    <a class="nav-link" id="gallary" href="{% url 'gallery' %}">Gallery</a>
+                  </li>
+                  <!-- <li class="nav-item">
+                    <a class="nav-link" id="blogs" href="{% url 'blogs' %}">Blogs</a>
+                  </li> -->
+                  <li class="nav-item">
+                    <a class="nav-link" id="contactus" href="{% url 'contactus' %}">Contact Us</a>
+                  </li>
+                  <li>
+                    <div style="width:50%;height: 1opx;"></div>
+                    
+                    </li>
+                
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                  {% if user.is_authenticated %}
+                  <li class="nav-item mr-3">
+                    <a href="{% url 'cust_dash' %}" class="btn btn-outline-light">welcome,{{user.first_name}}</a>
+                  </li>
+
+                  {% else %}
+                  <li class="nav-item mr-3">
+                    <a href="#" class="btn btn-outline-light" data-toggle="modal" data-target="#mymodal">Login</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{% url 'register' %}" class="btn btn-outline-light">SignIn</a>
+                  </li>
+                  {% endif %}
+                </ul>  
+              </div>
+            </div>
+            
+          </nav>
+          <div class="col-md-12">
+            <div class="modal fade" id="mymodal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="{% url 'user_login' %}" method="post">
+                      {%csrf_token %}
+                      <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" name="username"class="form-control" placeholder="Enter phone number">
+                      </div>
+                      <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Enter Password">
+                      </div>
+                      <div class="form-group">
+            
+                        <input type="submit" value="submit" class="btn btn-success" />
+                      </div>
+                      </form>
+                  </div>
+                </div>
+                
+                
+              </div>
+            </div>
+          </div>
+          
+        
+        {% block content %}
+        {% endblock %}
+        <!-- footer code -->
+        <footer class="page-footer font-small unique-color-dark" style="background-color:rgb(7, 80, 49);color: white;">
+
+            <div style="background-color:rgb(7, 80, 49);color: white;">
+              <div class="container">
+          
+                <!-- Grid row-->
+                <div class="row py-4 d-flex align-items-center">
+          
+                  <!-- Grid column -->
+                  <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                    <h6 class="mb-0">Get connected with us on social networks!</h6>
+                  </div>
+                  <!-- Grid column -->
+          
+                  <!-- Grid column -->
+                  <div class="col-md-6 col-lg-7 text-center text-md-right">
+          
+                    <!-- Facebook -->
+                    <a class="fb-ic" style="margin:1cm" href="#1">
+                      <img src="https://cdn.exclaimer.com/Handbook%20Images/facebook-icon_square_32x32.png" style="height:40px;width:40px">
+                    </a>
+                    <!-- instagram -->
+                    <a class="in-ic"  href="">
+                      <img src="https://cdn.exclaimer.com/Handbook%20Images/instagram-icon_square_32x32.png"style="height:40px;width:40px" >
+                      </a>
+
+                   
+                    <!--Linkedin -->
+                    <a class="li-ic" style="margin: 1cm;" href="#3">
+                      <img src="https://cdn.exclaimer.com/Handbook%20Images/linkedin-icon_square_32x32.png" style="height:40px;width:40px">
+                    </a>
+                
+          
+                  </div>
+                  <!-- Grid column -->
+          
+                </div>
+                <!-- Grid row-->
+          
+              </div>
+            </div>
+            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 100%;">
+            <!-- Footer Links -->
+            <div class="container text-center text-md-left mt-5" style="background-color:rgb(7, 80, 49);color: white;">
+          
+              <!-- Grid row -->
+              <div class="row mt-3">
+          
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          
+                  <!-- Content -->
+                  <h6 class="text- font-weight-bold"><a class="navbar-brand" href="#" style="color: rgb(181, 224, 24);font-weight: 900;">LocateHeavens</a></h6>
+                  <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    
+                  {% if user.is_authenticated %}
+                  {% else %}
+
+                    <ul class="list-unstyled listtext-center py-2">
+                      <li class="list-inline-item">
+                        <h5 class="mb-1">Login hear</h5>
+                      </li>
+                   
+
+                      <li class="list-inline-item">
+                        
+                         <a href="#" class="btn btn-outline-light" data-toggle="modal" data-target="#mymodal">Login</a>
+                      </li>
+                    </ul>
+                    {% endif %}
+          
+                </div>
+               
+                <!-- Grid column -->
+          
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" >
+          
+                  <!-- Links -->
+                  <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+                  <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                  <p>
+                    <a href="{% url 'index' %}" style="color: white;">Home</a>
+                  </p>
+                  <p>
+                    <a href="{% url 'laboutus' %}"style="color: white;">About us</a>
+                  </p>
+                  <p>
+                    <a href="{% url 'packages' %}" style="color: white;">Packages</a>
+                  </p>
+                  <p>
+                    <a href="{% url 'gallery' %}" style="color: white;">Gallery</a>
+                  </p>
+                  <!-- <p>
+                    <a href="#!" style="color: white;">Blogs</a>
+                  </p> -->
+                  <p>
+                    <a href="{% url 'contactus' %}" style="color: white;">Contact us</a>
+                  </p>
+          
+                </div>
+                <!-- Grid column -->
+          
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          
+                  <!-- Links -->
+                  <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                  <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                  <p>
+                    <i class="fas fa-home"></i> Adajan,Surat-395009</p>
+                  <p>
+                    <i class="fas fa-envelope"></i> locateheavens@gmail.com</p>
+                  <p>
+                    <i class="fas fa-phone"></i> + 01 234 567 88</p>
+                  <p>
+                    <i class="fas fa-print "></i> + 01 234 567 89</p>
+          
+                </div>
+                <!-- Grid column -->
+                
+          
+              </div>
+              <!-- Grid row -->
+          
+            </div>
+            <!-- Footer Links -->
+          
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-1"style="background-color:black;">© 2021 Copyright:
+              <a href="#"> locateheavens.com</a>
+            </div>
+            <!-- Copyright -->
+          
+          </footer>
+    </body>
+<html>

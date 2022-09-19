@@ -1,0 +1,126 @@
+{% extends "myapp/cust_base.html" %}
+{% block style%}
+<title>My tour</title>
+
+
+{% endblock %}
+
+{% block dashboard %}
+
+<h2>My Profile>My Tours</h2>
+<hr>
+<table class="table">
+    
+    <thead>
+        <th>Tour Name</th>
+        <th>Place</th>
+        <th>Duration</th>
+        <th>Fare</th>
+        <th>Action</th>
+    
+    </thead>
+    
+        {% for t in tours %}
+        <tr>
+            <td>{{t.tour_name}}</td>
+            <td>{{t.place_from}} - {{t.place_to}}</td>
+            <td>{{t.days}}Days {{t.nights}}Nights</td>
+            <td>&#8377;{{t.fare}}</td>
+            <td>
+                <button class="btn btn-success" data-toggle="modal" data-target="#m{{t.id}}"><i class="fa fa-eye"></i>View</button>
+                <a  href="{% url 'update_tour' %}?tid={{t.id}}" class="btn btn-primary"><i class="fa fa-edit"></i>Edit</a>
+                <a  href="{% url 'delete_tour' %}?tid={{t.id}}"class="btn btn-danger"><i class="fa fa-trash"></i>Delete</a>
+
+            </td>
+           
+        </tr>
+        <div class="modal fade" id="m{{t.id}}">
+            <div class="modal-dialog"  >
+              <div class="modal-content"style="width:150% ">
+                <div class="modal-header">
+                 <h1>{{t.tour_name}}</h1>
+        
+                  <button class="close" data-dismiss="modal">&times;</button>
+                  
+        
+                </div>
+                <div class="modal-body">
+                    <img src="/media/{{t.tour_image}}" style="height:60vh;width: 98vh;">
+                    <div>
+                    <div class="card">
+                        <dl class="dl-horizontal">
+                            <dt>Tour_ID:</dt>  
+                            <dd>{{t.id}}</dd>  
+                            <dt>Tour Name</dt>
+                            <dd>{{t.tour_name}}</dd>
+                            <dt>Place from:</dt>
+                            <dd>{{t.place_from}}</dd>
+                            <dt>Place to:</dt>
+                            <dd>{{t.place_to}}</dd>
+                            <dt>Duration:</dt>
+                            <dd>{{t.days}}Days {{t.nights}}Nights</dd>
+                            <dt>Places to be:</dt>
+                            <dd>{{t.places_to_be}}</dd>
+                            <dt>Fare:</dt>
+                            <dd>&#8377;{{t.fare}}</dd>
+                            <dt>Description:</dt>
+                            <dd>{{t.tour_descriptions}}</dd>
+                          </dl>
+
+                    
+                    </div> 
+                    
+                        
+                    <!-- <table class=""> 
+                        <tbody>
+                            <tr>
+                                <th>Tour_ID:</th>  
+                                <td>{{t.id}}</td>                 
+                            </tr>
+                            <tr>
+                                <th>Tour Name:</th>  
+                                <td>{{t.tour_name}}</td>                 
+                            </tr>
+                            <tr>
+                                <th>Place from:</th>  
+                                <td>{{t.place_from}}</td>                 
+                            </tr>
+                            
+                            <tr>
+                                <th>Place to:</th>  
+                                <td>{{t.place_to}}</td>                 
+                            </tr>
+
+                            
+                            <tr>
+                                <th>Duration:</th>  
+                                <td>{{t.days}}Days {{t.nights}}Nights</td>                 
+                            </tr>
+                            <tr>
+                                <th>Places to be:</th>  
+                                <td>{{t.places_to_be}}</td>                 
+                            </tr>
+                            <tr>
+                                <th>Fare:</th>  
+                                <td>&#8377;{{t.fare}}</td>                 
+                            </tr>
+                            <tr>
+                                <th>Description:</th>  
+                                <td>{{t.tour_descriptions}}</td>                 
+                            </tr>
+                            
+                        </tbody>
+
+                    </table> -->
+                </div>
+                
+        </div>
+    </div>
+    </div>
+    </div>
+
+        {% endfor %}
+    </tbody>
+   
+</table>
+{% endblock %}

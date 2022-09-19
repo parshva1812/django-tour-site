@@ -1,0 +1,233 @@
+{% extends "myapp/base.html" %}
+
+{% block head %}
+<!-- 
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<title>register</title>
+
+<style>
+    .form {
+
+        width: 50%;
+        margin-left: 25%;
+    }
+
+    .form-group {
+        padding: 0.3cm;
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+<br>
+<br>
+<br>
+<br>
+<h4 class="card-title mt-3 text-center">Create Account</h4>
+<br>
+<br>
+<script>
+
+    function validateForm() {
+        var fname = document.forms["myForm"]["fname"].value;
+        var mname = document.forms["myForm"]["mname"].value;
+        var lname = document.forms["myForm"]["lname"].value;
+        var email = document.forms["myForm"]["email"].value;
+        var contact = document.forms["myForm"]["contact"].value;
+        var address = document.forms["myForm"]["address"].value;
+        var gender = document.forms["myForm"]["gender"].value;
+        var age = document.forms["myForm"]["age"].value;
+        var password = document.forms["myForm"]["password"].value;
+        var cpassword = document.forms["myForm"]["cpassword"].value
+        if (fname == "") {
+          alert("First Name must be filled out");
+          return false;
+        }
+        else if (mname == "") {
+          alert(" Middle Name must be filled out");
+          return false;
+        }
+        else if (lname == "") {
+          alert(" Last Name must be filled out");
+          return false;
+        }
+        else if (email == "") {
+          alert("Email must be filled out");
+          return false;
+        }
+        else if (contact == "") {
+          alert("contat no must be filled out");
+          return false;
+        }
+        else if (gender == "") {
+          alert("Gender must be filled out");
+          return false;
+        }
+        else if (age == "") {
+          alert("Age must be filled out");
+          return false;
+        }
+        else if (address == "") {
+          alert("Address must be filled out");
+          return false;
+        }
+        else if (password < 6) {
+          alert("Password must be greater than 6 characters");
+          return false;
+        }
+        else if (password != cpassword) {
+          alert("Password and repeat Password should be match");
+          return false;
+        }
+        else{
+            return true;
+        }
+      }
+      </script>
+<div class="form">
+    <form name="myForm" method="POST">
+        {% csrf_token %}
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            <input name="fname" class="form-control" placeholder="First name" type="text">
+            <input name="mname" class="form-control" placeholder="Middle name" type="text">
+            <input name="lname" class="form-control" placeholder="Last name" type="text">
+        </div> 
+        <!-- form-group// -->
+        <div class="form-group" style="padding:0">
+            <p id="result1"></p>
+        </div>
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+            </div>
+            <input name="email" id="email" class="form-control" placeholder="Email address" type="email" onkeyup="checkuseremail()">
+        </div> <!-- form-group// -->
+        <div class="form-group" style="padding:0">
+            <p id="result2"></p>
+        </div>
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+            </div>
+            <select class="custom-select" style="max-width: 120px;">
+                <option selected="">+91</option>
+            </select>
+            <input name="contact" id="contact" class="form-control" placeholder="Phone number" type="text" onkeyup="checkusercontact()">
+        </div> <!-- form-group// -->
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+            </div>
+
+            <input name="address" class="form-control" placeholder="address" type="text">
+        </div> <!-- form-group end.// -->
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            <div class="form-control">
+                <label><b>Gender:</b></label>
+            </div>
+            <div class="form-control">
+
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male"> Male</label>
+            </div>
+            <div class="form-control">
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label>
+            </div>
+            <div class="form-control">
+                <input type="radio" id="other" name="gender" value="other">
+                <label for="other">Other</label>
+            </div>
+        </div>
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            <input name="age" class="form-control" placeholder="Age" type="text">
+        </div>
+
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+            </div>
+            <input class="form-control" placeholder="Create password" name="password" type="password">
+        </div> <!-- form-group// -->
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+            </div>
+            <input class="form-control" name="cpassword" placeholder="Repeat password" type="password">
+        </div> <!-- form-group// -->
+        <div class="form-group">
+            <button type="submit" onclick="return validateForm()" id="submit" class="btn  btn-block" style="background-color:rgb(7, 80, 49);color: white;"> Create
+                Account </button>
+        </div> <!-- form-group// -->
+        <p class="text-center">Have an account? 
+
+        <a href="#" class="" data-toggle="modal" data-target="#mymodal">Login</a>
+        
+         </p>
+    </form>
+</div>
+<script>
+    function checkusercontact(){
+        let contact=document.getElementById("contact").value
+        $.ajax({
+            url:"{% url 'check_user' %}",
+            type:"get",
+            data:{contact:contact},
+            success: function(data){
+                if(data == "Exist"){
+                $("#result2").html("Contact No already registered").addClass("text-danger")
+                $("#contact").addClass("alert alert-danger")
+                $("#submit").attr("disabled","disabled")
+                }
+                else{
+                $("#result2").html("")
+                $("#contact").removeClass("alert alert-danger")
+                $("#submit").removeAttr("disabled")
+                }
+            }
+        })
+    }
+    function checkuseremail(){
+        let email=document.getElementById("email").value
+        $.ajax({
+            url:"{% url 'check_user_email' %}",
+            type:"get",
+            data:{email:email},
+            success: function(data){
+                if(data == "Exist"){
+                $("#result1").html("Email already registered").addClass("text-danger")
+                $("#email").addClass("alert alert-danger")
+                $("#submit").attr("disabled","disabled")
+                }
+                else{
+                $("#result1").html("")
+                $("#email").removeClass("alert alert-danger")
+                $("#submit").removeAttr("disabled")
+
+
+                }
+            }
+        })
+        
+    }
+</script>
+
+{% if status %}
+<script>
+    alert("{{ status}}")
+    window.location = "/"
+</script>
+
+{% endif %}
+{% endblock %}
